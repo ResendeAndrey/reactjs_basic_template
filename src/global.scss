@@ -1,0 +1,36 @@
+//default colors project
+
+
+@import "./styles/config";
+@import "~bootstrap/scss/bootstrap.scss";
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.grid-sidebar {
+  display: grid; 
+  grid-template-columns: 20% 1fr;
+  grid-template-rows: 100vh 1fr;
+}
+
+.grid-container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-areas: "nav" "main" "footer";
+  grid-template-rows: 10% 1fr 10%;
+}
+.grid-header {
+  grid-area: nav;
+}
+
+.grid-main {
+  grid-area: main;
+}
+
+.grid-footer {
+  grid-area: footer;
+}
