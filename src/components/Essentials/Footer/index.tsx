@@ -4,7 +4,7 @@ import React from 'react'
 
 const Footer: React.FC = () => {
   return (
-    <div className='grid-footer p-3 bg-info'>
+    <div className='p-3 bg-info'>
       <div>footer</div>
     </div>
   )

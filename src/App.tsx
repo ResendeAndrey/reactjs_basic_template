@@ -1,11 +1,14 @@
 import { AuthContextProvider } from './context/authContext'
+import { DeviceProvider } from './context/deviceContext'
 import Router from './router/router'
 
 function App() {
   return (
-    <AuthContextProvider>
-      <Router />
-    </AuthContextProvider>
+    <DeviceProvider>
+      <AuthContextProvider>
+        <Router />
+      </AuthContextProvider>
+    </DeviceProvider>
   )
 }
 

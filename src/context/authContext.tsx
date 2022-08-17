@@ -44,6 +44,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }
     return null
   }
+
   return (
     <AuthContext.Provider
       value={{

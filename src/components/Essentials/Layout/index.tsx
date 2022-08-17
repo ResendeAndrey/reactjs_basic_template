@@ -1,4 +1,6 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useCallback, useEffect, useState } from 'react'
+import { useDeviceType } from '../../../context/deviceContext'
+
 import Footer from '../Footer'
 import Header from '../Header'
 import Sidebar from '../Sidebar'
@@ -10,15 +12,36 @@ type LayoutProps = {
 }
 
 const Layout = ({ hasSidebar, children }: LayoutProps) => {
+  const { isMobileView } = useDeviceType()
+  const [toggleSideBar, setToggleSideBar] = useState(true)
+
+  const onToggleSideBar = () => {
+    setToggleSideBar(!toggleSideBar)
+  }
+
+  // this keep the sidebar always visible when is mobile - Depends on the client
+  const getSideBarFixWhenMobile = useCallback(() => {
+    if (isMobileView) {
+      setToggleSideBar(true)
+    }
+  }, [isMobileView])
+
+  useEffect(() => {
+    getSideBarFixWhenMobile()
+  }, [getSideBarFixWhenMobile])
+
   return (
-    <div className={hasSidebar ? 'grid-sidebar position-fixed w-100' : ''}>
-      {hasSidebar && <Sidebar />}
+    <div>
+      <Header onToggleSideBar={onToggleSideBar} toggleSideBar={toggleSideBar} />
       <div
-        className={` grid-container ${hasSidebar ? 'position-relative h-100 overflow-auto' : ''}`}
+        className={`${hasSidebar ? 'grid-sidebar' : ''} ${!toggleSideBar && 'grid-sidebar-hidden'}`}
       >
-        <Header />
-        <div className='grid-main'>{children}</div>
-        <Footer />
+        {hasSidebar && toggleSideBar && <Sidebar />}
+        <div className='grid-container '>
+          {children}
+
+          <Footer />
+        </div>
       </div>
     </div>
   )
