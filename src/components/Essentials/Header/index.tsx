@@ -52,9 +52,9 @@ const Header = ({ onToggleSideBar, toggleSideBar }: HeaderProps) => {
       <nav className={isNavExpanded ? 'navigation-menu expanded ' : 'navigation-menu'}>
         <ul className='d-flex align-items-center justify-content-center gap-2'>
           {header &&
-            header.map((item) => (
+            header.map((item, i) => (
               <li
-                key={item.title}
+                key={i}
                 onClick={() => {
                   handleNavigate(item.url)
                 }}

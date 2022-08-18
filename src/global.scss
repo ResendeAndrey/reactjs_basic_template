@@ -16,17 +16,26 @@
 ul,li {
   
   list-style: none;
-  margin-bottom: 0 !important;
-  padding-left: 0 !important;
+  margin-bottom: 0 ;
+  padding-left: 0 ;
 }
 
-a {
-  text-decoration: none;
+a, a:hover {
+  text-decoration: none ;
+  color: $white;
   cursor: pointer;
 }
 
 svg {
   cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.active {
+  background-color: $primary;
 }
 
 .header-fixed {
@@ -101,6 +110,14 @@ svg {
   bottom: 0;
   height: calc(100vh - 5rem);
   width: 100%;
+  }
+
+  .sidebar-mobile {
+    position: absolute;
+    bottom: 4rem;
+    left: 0;
+    right: 0;
+    width: 100%;
   }
   
 }

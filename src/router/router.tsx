@@ -11,15 +11,16 @@ type FinalRouteProps = {
   layout: any
   component: any
   hasSidebar?: boolean
+  routePrivate?: boolean
 }
 
 const Router = () => {
-  const FinalRoute = ({ layout, component, hasSidebar }: FinalRouteProps) => {
+  const FinalRoute = ({ layout, component, hasSidebar, routePrivate }: FinalRouteProps) => {
     const { session } = useAuth()
     const Layout = layout
     const Component = component
 
-    if (!session.token) {
+    if (!session.token && routePrivate) {
       return <Navigate to='/login' />
     } else {
       return (
@@ -41,7 +42,12 @@ const Router = () => {
               key={`routes-${route.path}`}
               path={route.path}
               element={
-                <FinalRoute component={Component} layout={Layout} hasSidebar={route.hasSidebar} />
+                <FinalRoute
+                  component={Component}
+                  layout={Layout}
+                  hasSidebar={route.hasSidebar}
+                  routePrivate={route.private}
+                />
               }
             />
           )
