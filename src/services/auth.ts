@@ -1,10 +1,10 @@
 import { useAuth } from './../context/authContext';
 import { AxiosResponse } from 'axios'
 import Axios from '../config/api/api'
+import { setLoggedInUser } from '../utils/hooks/useAuth';
 
 export default (() => {
   const axios = Axios()
-  const { setLoggedInUser } = useAuth()
   return {
     create: (data: object) => {
       return axios.post('/create',data)

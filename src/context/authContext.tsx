@@ -2,7 +2,6 @@ import { createContext, ReactNode, useCallback, useContext, useEffect, useState 
 
 type authContextType = {
   clearSession: () => void
-  setLoggedInUser: (data: object) => void
   getToken: () => void
   session: SessionProps
 }
@@ -12,13 +11,13 @@ type AuthContextProviderProps = {
 }
 
 type SessionProps = {
-  token: string
+  token: string | null
 }
 
 export const AuthContext = createContext({} as authContextType)
 
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [session, setSession] = useState<SessionProps>({ token: '5646456' } as SessionProps)
+  const [session, setSession] = useState<SessionProps>({ token: null } as SessionProps)
 
   const StorageKeys = {
     SESSION: 'userData',
@@ -35,9 +34,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     getUserData()
   }, [getUserData])
 
-  const setLoggedInUser = (data: object) =>
-    localStorage.setItem(StorageKeys.SESSION, JSON.stringify(data))
   const clearSession = () => localStorage.removeItem(StorageKeys.SESSION)
+
   const getToken = () => {
     if (session.token) {
       return session.token
@@ -49,7 +47,6 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     <AuthContext.Provider
       value={{
         session,
-        setLoggedInUser,
         clearSession,
         getToken,
       }}
